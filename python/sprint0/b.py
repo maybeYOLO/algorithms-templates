@@ -1,8 +1,11 @@
 from typing import List, Tuple
 
 def zipper(a: List[int], b: List[int]) -> List[int]:
-    # Здесь реализация вашего решения
-    pass
+    i = []
+    for a, b in zip(a, b):
+        i.append(a)
+        i.append(b)
+    return i
 
 def read_input() -> Tuple[List[int], List[int]]:
     n = int(input())
