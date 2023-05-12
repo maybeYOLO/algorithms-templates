@@ -12,12 +12,26 @@
 если будут нажимать на клавиши вдвоём.
 """
 
-from typing import Tuple
+from typing import Tuple, List
+
+
+def process_row(row: str, num_sum: List[int]) -> None:
+    for index in range(1, 10):
+        for sym in row:
+            if sym == str(index):
+                num_sum[index - 1] += 1
 
 
 def trainer(k: int, row1: str, row2: str, row3: str, row4: str) -> int:
     result = 0
-
+    num_sum = [0] * 9
+    process_row(row1, num_sum)
+    process_row(row2, num_sum)
+    process_row(row3, num_sum)
+    process_row(row4, num_sum)
+    for n_sum in num_sum:
+        if 0 < n_sum <= k * 2:
+            result += 1
     return result
 
 
