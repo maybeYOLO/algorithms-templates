@@ -8,17 +8,36 @@
 Поэтому ему важно для каждого участка знать расстояние до ближайшего пустого участка.
 Если участок пустой, эта величина будет равна нулю — расстояние до самого себя.
 
-Помогите Тимофею посчитать искомые расстояния.
-Для этого у вас есть карта улицы.
+Помогите Тимофею посчитать искомые расстояния. Для этого у вас есть карта улицы.
 Дома в городе Тимофея нумеровались в том порядке, в котором строились,
 поэтому их номера на карте никак не упорядочены. Пустые участки обозначены нулями.
 """
 
 from typing import List
 
+# В первой строке дана длина улицы —– n (1 ≤ n ≤ 10^6)
+MAX_STREET_LENGTH = 1_000_000
+
 
 def process_street(street) -> str:
-    return " ".join(map(str, street))
+    street_length = len(street)
+    distances = [0] * street_length
+    forward_count = MAX_STREET_LENGTH + 1
+    fence = 0
+    for index in range(street_length):
+        if street[index] == 0:
+            backward_count = 0
+            back_index = index
+            while back_index >= fence:
+                distances[back_index] = min(distances[back_index], backward_count)
+                backward_count += 1
+                back_index -= 1
+            fence = index
+            forward_count = 1
+        else:
+            distances[index] = forward_count
+            forward_count += 1
+    return " ".join(map(str, distances))
 
 
 def read_input() -> List[int]:
