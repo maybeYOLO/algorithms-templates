@@ -1,24 +1,28 @@
-"""
-Тимофей ищет место, чтобы построить себе дом.
-Улица, на которой он хочет жить, имеет длину n,
-то есть состоит из n одинаковых идущих подряд участков.
-Каждый участок либо пустой, либо на нём уже построен дом.
-
-Общительный Тимофей не хочет жить далеко от других людей на этой улице.
-Поэтому ему важно для каждого участка знать расстояние до ближайшего пустого участка.
-Если участок пустой, эта величина будет равна нулю — расстояние до самого себя.
-
-Помогите Тимофею посчитать искомые расстояния.
-Для этого у вас есть карта улицы.
-Дома в городе Тимофея нумеровались в том порядке, в котором строились,
-поэтому их номера на карте никак не упорядочены. Пустые участки обозначены нулями.
-"""
+# ID = 87200963
 
 from typing import List
 
 
 def process_street(street) -> str:
-    return " ".join(map(str, street))
+    zero_position = 0
+    street_length = len(street)
+    distance = [0] * street_length
+    forward_count = 1_000_001
+    for index in range(street_length):
+        if street[index] == 0:
+            reverse_index = index
+            reverse_count = 0
+            while reverse_index >= zero_position:
+                if distance[reverse_index] > reverse_count:
+                    distance[reverse_index] = reverse_count
+                reverse_count += 1
+                reverse_index -= 1
+            zero_position = index
+            forward_count = 1
+        else:
+            distance[index] = forward_count
+            forward_count += 1
+    return " ".join(map(str, distance))
 
 
 def read_input() -> List[int]:
@@ -26,8 +30,4 @@ def read_input() -> List[int]:
     return list(map(int, input().strip().split()))
 
 
-# print(process_street(read_input()))
-
-print(process_street((0, 1, 4, 9, 0)))       # 0 1 2 1 0
-print(process_street((0, 7, 9, 4, 8, 20)))   # 0 1 2 3 4 5
-print(process_street((1, 2, 3, 4, 0)))       # 4 3 2 1 0
+print(process_street(read_input()))

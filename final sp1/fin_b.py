@@ -1,23 +1,27 @@
-"""
-Игра «Тренажёр для скоростной печати» представляет собой поле из клавиш 4x4.
-В нём на каждом раунде появляется конфигурация цифр и точек.
-На клавише написана либо точка, либо цифра от 1 до 9.
-
-В момент времени t игрок должен одновременно нажать на все клавиши,
-на которых написана цифра t.
-Гоша и Тимофей могут нажать в один момент времени на k клавиш каждый.
-Если в момент времени t нажаты все нужные клавиши, то игроки получают 1 балл.
-
-Найдите число баллов, которое смогут заработать Гоша и Тимофей,
-если будут нажимать на клавиши вдвоём.
-"""
+# ID 87201921
 
 from typing import Tuple
 
 
+def process_row(row: str, number: int):
+    check = str(number)
+    result = 0
+    for symbol in row:
+        if symbol == check:
+            result += 1
+    return result
+
+
 def trainer(k: int, row1: str, row2: str, row3: str, row4: str) -> int:
     result = 0
-
+    for number in range(1, 10):
+        count = 0
+        count += process_row(row1, number)
+        count += process_row(row2, number)
+        count += process_row(row3, number)
+        count += process_row(row4, number)
+        if count > 0 and count <= k * 2:
+            result += 1
     return result
 
 
@@ -30,8 +34,4 @@ def read_input() -> Tuple[int, str, str, str, str]:
     return k, row1, row2, row3, row4
 
 
-# print(trainer(read_input())
-
-print(trainer(3, '1231', '2..2', '2..2', '2..2'))   # 2
-print(trainer(4, '1111', '9999', '1111', '9911'))   # 1
-print(trainer(4, '1111', '1111', '1111', '1111'))   # 0
+print(trainer(*read_input()))
