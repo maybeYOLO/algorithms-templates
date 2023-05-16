@@ -1,4 +1,4 @@
-# ID 87201921
+# ID 87374910
 
 from typing import Tuple, List
 
@@ -25,6 +25,7 @@ def read_input() -> Tuple[int, List[str]]:
     for _ in range(4):
         matrix.append(input().strip())
     return keys * NUM_PLAYERS, matrix
+
 
 if __name__ == '__main__':
     print(trainer(*read_input()))
