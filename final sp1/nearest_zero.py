@@ -2,14 +2,15 @@
 
 from typing import List
 
+MAX_STREET_LENGTH = 1_000_000
 
 def process_street(street) -> str:
     zero_position = 0
     street_length = len(street)
     distance = [0] * street_length
-    forward_count = 1_000_001
+    forward_count = MAX_STREET_LENGTH + 1
     for index in range(street_length):
-        if street[index] == 0:
+        if street[index] == "0":
             reverse_index = index
             reverse_count = 0
             while reverse_index >= zero_position:
@@ -27,7 +28,7 @@ def process_street(street) -> str:
 
 def read_input() -> List[int]:
     _ = input()
-    return list(map(int, input().strip().split()))
+    return input().strip().split()
 
-
-print(process_street(read_input()))
+if __name__ == '__main__':
+    print(process_street(read_input()))
