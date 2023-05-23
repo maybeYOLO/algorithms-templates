@@ -1,3 +1,5 @@
+# ID=87620987
+
 from typing import Union
 
 
@@ -35,7 +37,8 @@ def calculate(expr: str) -> int:
             value_met = True
         elif symbol == ' ':
             if value_met:
-                stack.push(-value if minus_met else value)
+                result = -value if minus_met else value
+                stack.push(result)
                 value = 0
                 value_met = False
             elif minus_met:
