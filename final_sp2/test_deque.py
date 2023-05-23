@@ -22,10 +22,10 @@ Value — целое число, по модулю не превосходяще
 Выведите результат выполнения каждой команды на отдельной строке.
 Для успешных запросов push_back(x) и push_front(x) ничего выводить не надо.
 """
-from deque import process_command, print_result
+from deque import Deque, process_command, print_result
 
 print('Пример 1. Ожидаемый вывод: 861 -819')
-deque = [0] * 4
+deque = Deque(4)
 print_result(process_command(deque, 'push_front 861'))
 print_result(process_command(deque, 'push_front -819'))
 print_result(process_command(deque, 'pop_back'))        # 861
@@ -33,7 +33,7 @@ print_result(process_command(deque, 'pop_back'))        # -819
 print('.')
 
 print('Пример 2. Ожидаемый вывод: -855 0 844')
-deque = [0] * 10
+deque = Deque(10)
 print_result(process_command(deque, 'push_front -855'))
 print_result(process_command(deque, 'push_front 0'))
 print_result(process_command(deque, 'pop_back'))
@@ -44,7 +44,7 @@ print_result(process_command(deque, 'push_back 823'))
 print('.')
 
 print('Пример 3. Ожидаемый вывод: 20 102')
-deque = [0] * 6
+deque = Deque(6)
 print_result(process_command(deque, 'push_front -201'))
 print_result(process_command(deque, 'push_back 959'))
 print_result(process_command(deque, 'push_back 102'))
