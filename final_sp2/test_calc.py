@@ -64,3 +64,6 @@ from calc import calculate
 
 print(calculate('2 1 + 3 *'))       # 9
 print(calculate('7 2 + 4 * 2 +'))   # 38
+print(calculate('-1 3 /'))          # -1
+print(calculate('12 3 /'))          # 4
+print(calculate('5 3 -'))           # 2
