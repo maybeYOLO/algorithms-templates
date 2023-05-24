@@ -12,53 +12,74 @@ class Deque:
         self.count = 0
 
     def _increment_index(self, index: int) -> int:
-        return index + 1 if index < self.size - 1 else 0
+        # return index + 1 if index < self.size - 1 else 0
+        return (index + 1) % self.size
 
     def _decrement_index(self, index: int) -> int:
         return index - 1 if index > 0 else self.size - 1
 
-    def push_front(self, value: int) -> Union[str, None]:
+    def push_front(self, value: int) -> None:
         if self.count == self.size:
-            return 'error'
+            raise DequeOverflowException('Дек переполнен с головы')
         self.head = self._decrement_index(self.head)
         self.data[self.head] = value
         self.count += 1
 
-    def push_back(self, value: int) -> Union[str, None]:
+    def push_back(self, value: int) -> None:
         if self.count == self.size:
-            return 'error'
+            raise DequeOverflowException('Дек переполнен с хвоста')
         self.tail = self._increment_index(self.tail)
         self.data[self.tail] = value
         self.count += 1
 
-    def pop_front(self) -> Union[int, str]:
+    def pop_front(self) -> int:
         if self.count == 0:
-            return 'error'
+            raise DequeUnderflowException('Дек исчерпан с головы')
         value: int = self.data[self.head]
         self.head = self._increment_index(self.head)
         self.count -= 1
         return value
 
-    def pop_back(self) -> Union[int, str]:
+    def pop_back(self) -> int:
         if self.count == 0:
-            return 'error'
+            raise DequeUnderflowException('Дек исчерпан с хвоста')
         value: int = self.data[self.tail]
         self.tail = self._decrement_index(self.tail)
         self.count -= 1
         return value
 
 
+class DequeOverflowException(Exception):
+    pass
+
+
+class DequeUnderflowException(Exception):
+    pass
+
+
 def process_command(deque: Deque, command: str) -> Union[int, str, None]:
     result = None
     parts = command.split()
     if parts[0] == 'push_front':
-        result = deque.push_front(int(parts[1]))
+        try:
+            result = deque.push_front(int(parts[1]))
+        except:
+            result = 'error'
     elif parts[0] == 'push_back':
-        result = deque.push_back(int(parts[1]))
+        try:
+            result = deque.push_back(int(parts[1]))
+        except:
+            result = 'error'
     elif parts[0] == 'pop_front':
-        result = deque.pop_front()
+        try:
+            result = deque.pop_front()
+        except:
+            result = 'error'
     elif parts[0] == 'pop_back':
-        result = deque.pop_back()
+        try:
+            result = deque.pop_back()
+        except:
+            result = 'error'
     return result
 
 

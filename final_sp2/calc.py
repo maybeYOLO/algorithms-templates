@@ -11,7 +11,14 @@ class Stack():
         self.data.append(value)
 
     def pop(self) -> int:
+        if len(self.data) == 0:
+            raise StackUnderflowException('Исчерпание стека')
         return self.data.pop()
+
+
+class StackUnderflowException(Exception):
+    pass
+
 
 def calculate(expr: str) -> int:
     result = 0
