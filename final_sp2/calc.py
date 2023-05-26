@@ -1,6 +1,7 @@
 # ID=87620987
 
 from typing import Union
+from operator import add, sub, mul, floordiv
 
 
 class Stack():

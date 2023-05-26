@@ -1,3 +1,6 @@
+from operator import add
+
+
 class myClass():
     def print1(*args):
         print(1, *args)
@@ -12,3 +15,4 @@ def parse(command, *args):
 
 parse(*'print1 aaa bbb'.split())
 parse(*'print2 aa bb cc'.split())
+print(add(1, 2))
