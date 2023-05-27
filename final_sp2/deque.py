@@ -12,7 +12,6 @@ class Deque:
         self.count = 0
 
     def _increment_index(self, index: int) -> int:
-        # return index + 1 if index < self.size - 1 else 0
         return (index + 1) % self.size
 
     def _decrement_index(self, index: int) -> int:
