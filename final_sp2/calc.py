@@ -3,6 +3,13 @@
 from typing import Union
 from operator import add, sub, mul, floordiv
 
+OPERATORS = {
+    '+': add,
+    '-': sub,
+    '*': mul,
+    '/': floordiv
+}
+
 
 class Stack():
     def __init__(self) -> None:
@@ -28,20 +35,15 @@ def calculate(expr: str) -> int:
     minus_met = False
     stack = Stack()
     for symbol in expr + ' ':
-        if symbol == '+':
-            result = stack.pop() + stack.pop()
-            stack.push(result)
-        elif symbol == '-':
+        if symbol == '-':
             minus_met = True
-        elif symbol == '*':
-            result = stack.pop() * stack.pop()
-            stack.push(result)
-        elif symbol == '/':
-            op2 = stack.pop()
-            result = stack.pop() // op2
+        elif symbol in OPERATORS:
+            operand2nd = stack.pop()
+            operand1st = stack.pop()
+            result = OPERATORS[symbol](operand1st, operand2nd)
             stack.push(result)
         elif '0' <= symbol <= '9':
-            value = value * 10 + int(symbol)
+            value = value * 10 + ord(symbol) - 48
             value_met = True
         elif symbol == ' ':
             if value_met:

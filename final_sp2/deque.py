@@ -59,27 +59,11 @@ class DequeUnderflowException(Exception):
 
 def process_command(deque: Deque, command: str) -> Union[int, str, None]:
     result = None
-    parts = command.split()
-    if parts[0] == 'push_front':
-        try:
-            result = deque.push_front(int(parts[1]))
-        except:
-            result = 'error'
-    elif parts[0] == 'push_back':
-        try:
-            result = deque.push_back(int(parts[1]))
-        except:
-            result = 'error'
-    elif parts[0] == 'pop_front':
-        try:
-            result = deque.pop_front()
-        except:
-            result = 'error'
-    elif parts[0] == 'pop_back':
-        try:
-            result = deque.pop_back()
-        except:
-            result = 'error'
+    method, *params = command.split()
+    try:
+        result = getattr(deque, method)(*params)
+    except:
+        result = 'error'
     return result
 
 
