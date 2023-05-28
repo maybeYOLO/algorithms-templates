@@ -1,4 +1,4 @@
-# ID=87726638
+# ID=87769572
 
 from typing import Union
 from operator import add, sub, mul, floordiv
@@ -37,6 +37,11 @@ def calculate(expr: str) -> int:
     operator_met = False
     symbol_operator = ''
     stack = Stack()
+    """
+    Действие выполняется когда после числа или оператора встречается пробел
+    Для выполнения действия над последним числом или оператором,
+    к выражению добавляется оконечный пробел
+    """
     for symbol in expr + ' ':
         if symbol in OPERATORS:
             operator_met = True
@@ -57,7 +62,7 @@ def calculate(expr: str) -> int:
                 operand1st = stack.pop()
                 result = OPERATORS[symbol_operator](operand1st, operand2nd)
                 stack.push(result)
-                operator_met = False
+            operator_met = False
             minus_met = False
     return result
 

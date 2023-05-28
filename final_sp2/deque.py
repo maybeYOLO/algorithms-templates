@@ -1,4 +1,4 @@
-# ID=87726607
+# ID=87769738
 
 from typing import Union
 
@@ -15,7 +15,6 @@ class Deque:
         return (index + 1) % self.size
 
     def _decrement_index(self, index: int) -> int:
-        # return index - 1 if index > 0 else self.size - 1
         return (index - 1) % self.size
 
     def push_front(self, value: int) -> None:
