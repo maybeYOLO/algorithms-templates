@@ -15,7 +15,8 @@ class Deque:
         return (index + 1) % self.size
 
     def _decrement_index(self, index: int) -> int:
-        return index - 1 if index > 0 else self.size - 1
+        # return index - 1 if index > 0 else self.size - 1
+        return (index - 1) % self.size
 
     def push_front(self, value: int) -> None:
         if self.count == self.size:
@@ -61,7 +62,7 @@ def process_command(deque: Deque, command: str) -> Union[int, str, None]:
     method, *params = command.split()
     try:
         result = getattr(deque, method)(*params)
-    except:
+    except (DequeOverflowException, DequeUnderflowException):
         result = 'error'
     return result
 

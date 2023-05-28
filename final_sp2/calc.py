@@ -9,6 +9,7 @@ OPERATORS = {
     '*': mul,
     '/': floordiv
 }
+ORD_TO_INT = ord('0')
 
 
 class Stack():
@@ -33,17 +34,17 @@ def calculate(expr: str) -> int:
     value = 0
     value_met = False
     minus_met = False
+    operator_met = False
+    symbol_operator = ''
     stack = Stack()
     for symbol in expr + ' ':
-        if symbol == '-':
-            minus_met = True
-        elif symbol in OPERATORS:
-            operand2nd = stack.pop()
-            operand1st = stack.pop()
-            result = OPERATORS[symbol](operand1st, operand2nd)
-            stack.push(result)
+        if symbol in OPERATORS:
+            operator_met = True
+            symbol_operator = symbol
+            if symbol == '-':
+                minus_met = True
         elif '0' <= symbol <= '9':
-            value = value * 10 + ord(symbol) - 48
+            value = value * 10 + ord(symbol) - ORD_TO_INT
             value_met = True
         elif symbol == ' ':
             if value_met:
@@ -51,9 +52,12 @@ def calculate(expr: str) -> int:
                 stack.push(result)
                 value = 0
                 value_met = False
-            elif minus_met:
-                result = -(stack.pop() - stack.pop())
+            elif operator_met:
+                operand2nd = stack.pop()
+                operand1st = stack.pop()
+                result = OPERATORS[symbol_operator](operand1st, operand2nd)
                 stack.push(result)
+                operator_met = False
             minus_met = False
     return result
 
