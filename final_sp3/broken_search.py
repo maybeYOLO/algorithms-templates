@@ -1,8 +1,17 @@
 from typing import List
 
+
+def partial_search(nums: List[int], target: int, index: int, half_length: int, full_length: int) -> int:
+    if nums[index] == target:
+        return index 
+    if half_length == 1:
+        return -1
+    # q
+
+
 def broken_search(nums: List[int], target: int) -> int:
-    result = -1
-    return result
+    return partial_search(nums, target, 0, len(nums) // 2, len(nums))
+
 
 if __name__ == '__main__':
     def test() -> None:
