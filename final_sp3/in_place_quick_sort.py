@@ -1,4 +1,4 @@
-from typing import List,Union
+from typing import List, Union
 
 
 def in_place_quick_sort(participants: List[List[Union[str, int]]]) -> None:
