@@ -37,7 +37,8 @@ def q_sort(nums, left, right) -> None:
     q_sort(nums, left + 1, end)
 
 
-nums = [4, 8, 9, 20, 1, 5, 3, 10]
+# nums = [4, 8, 9, 20, 1, 5, 3, 10]
+nums = [4, 6, 2, 2, 4]
 logging.basicConfig(
     level=logging.INFO,
     filename="q_sort.log",
