@@ -23,3 +23,15 @@ participants = [
 in_place_quick_sort(participants)
 for participant in participants:
     print(participant[0])
+
+print('Тест 3. Ожидается timofey rita gosha gena alla')
+participants = [
+    ['alla', 0, 10],
+    ['gena', 0, 9],
+    ['gosha', 0, 8],
+    ['rita', 0, 7],
+    ['timofey', 0, 0],
+]
+in_place_quick_sort(participants)
+for participant in participants:
+    print(participant[0])
