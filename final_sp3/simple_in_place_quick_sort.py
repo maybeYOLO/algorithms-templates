@@ -12,6 +12,7 @@ def q_sort(nums, left, right, count) -> None:
         if nums[left] > nums[right]:
             logging.info(f'nums[left]={nums[left]} > nums[right]={nums[right]}')
             nums[left], nums[right] = nums[right], nums[left]
+            logging.info(f'{left} {right} {nums} \'swap\'')
         return
     if count > 10:
         logging.critical('\'count limit\'')
@@ -39,7 +40,8 @@ def q_sort(nums, left, right, count) -> None:
         # logging.info(f'\'{pivot}\' {start} {left} {right} {end} {nums} {count}')
     if left > start:
         q_sort(nums, start, left - 1, count)
-    q_sort(nums, left, end, count)
+        q_sort(nums, left, end, count)
+    q_sort(nums, left + 1, end, count)
 
 
 nums = [4, 8, 9, 20, 1, 5, 3, 10]
