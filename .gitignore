@@ -9,3 +9,4 @@ __pycache__/
 *$py.class
 final sp1/__pycache__/nearest_zero.cpython-39.pyc
 final sp1/__pycache__/sleight_of_hand.cpython-39.pyc
+*.log
