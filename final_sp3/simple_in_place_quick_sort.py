@@ -45,7 +45,7 @@ logging.basicConfig(
     level=logging.INFO,
     filename="q_sort.log",
     filemode="w",
-    format="%(message)s"
+    format="[%(levelname)s] %(message)s"
 )
 q_sort(nums, 0, len(nums) - 1, 0)
 print(nums)
