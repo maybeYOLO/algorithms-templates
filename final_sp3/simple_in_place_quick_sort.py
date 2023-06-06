@@ -1,5 +1,6 @@
 import logging
 
+
 def q_sort(nums, left, right, count) -> None:
     logging.info('.' * 60)
     logging.info(f'nums={nums} left={left} right={right} count={count}')
@@ -24,21 +25,22 @@ def q_sort(nums, left, right, count) -> None:
         while nums[left] < pivot and left < right - 1:
             left += 1
             logging.info(f'left={left} nums[{left}]={nums[left]}')
-        while nums[right] >= pivot and right > left+ 1:
+        while nums[right] >= pivot and right > left + 1:
             right -= 1
             logging.info(f'right={right} nums[{right}]={nums[right]}')
         if left < right:
             if nums[left] > nums[right]:
                 nums[left], nums[right] = nums[right], nums[left]
-                logging.info(f'\'{pivot}\' {start} {left} {right} {end} {nums} s')
-            if left < right - 1:
-                left += 1
-            if left < right - 1:
+                logging.info(f'\'{pivot}\' {start} {left} {right} {end} {nums} \'s\'')
+            if left < right:
                 right -= 1
-        logging.info(f'`{pivot}` {start} {left} {right} {end} {nums} {count}')
-    q_sort(nums, start, left, count)
-    q_sort(nums, right, end, count)
-    
+            if left < right:
+                left += 1
+        # logging.info(f'\'{pivot}\' {start} {left} {right} {end} {nums} {count}')
+    if left > start:
+        q_sort(nums, start, left - 1, count)
+    q_sort(nums, left, end, count)
+
 
 nums = [4, 8, 9, 20, 1, 5, 3, 10]
 logging.basicConfig(
