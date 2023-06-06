@@ -1,9 +1,9 @@
 import logging
 
 
-def q_sort(nums, left, right, count) -> None:
+def q_sort(nums, left, right) -> None:
     logging.info('.' * 60)
-    logging.info(f'nums={nums} left={left} right={right} count={count}')
+    logging.info(f'nums={nums} left={left} right={right}')
     if left == right:
         logging.info(f'left={left} == right={right}')
         return
@@ -14,10 +14,6 @@ def q_sort(nums, left, right, count) -> None:
             nums[left], nums[right] = nums[right], nums[left]
             logging.info(f'{left} {right} {nums} \'swap\'')
         return
-    if count > 10:
-        logging.critical('\'count limit\'')
-        return
-    count += 1
     start = left
     end = right
     pivot = nums[left]
@@ -39,9 +35,9 @@ def q_sort(nums, left, right, count) -> None:
                 left += 1
         # logging.info(f'\'{pivot}\' {start} {left} {right} {end} {nums} {count}')
     if left > start:
-        q_sort(nums, start, left - 1, count)
-        q_sort(nums, left, end, count)
-    q_sort(nums, left + 1, end, count)
+        q_sort(nums, start, left - 1)
+        q_sort(nums, left, end)
+    q_sort(nums, left + 1, end)
 
 
 nums = [4, 8, 9, 20, 1, 5, 3, 10]
@@ -51,5 +47,5 @@ logging.basicConfig(
     filemode="w",
     format="[%(levelname)s] %(message)s"
 )
-q_sort(nums, 0, len(nums) - 1, 0)
+q_sort(nums, 0, len(nums) - 1)
 print(nums)
