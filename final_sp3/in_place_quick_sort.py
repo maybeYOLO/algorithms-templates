@@ -6,21 +6,21 @@ PENALTY_INDEX = 2
 
 
 def nums_gt(left_value, right_value) -> bool:
-    return left_value[SCORE_INDEX] > right_value[SCORE_INDEX] or (
+    return left_value[SCORE_INDEX] < right_value[SCORE_INDEX] or (
         left_value[SCORE_INDEX] == right_value[SCORE_INDEX]
-        and (left_value[PENALTY_INDEX] < right_value[PENALTY_INDEX] or (
+        and (left_value[PENALTY_INDEX] > right_value[PENALTY_INDEX] or (
             left_value[PENALTY_INDEX] == right_value[PENALTY_INDEX]
-            and left_value[NAME_INDEX] < right_value[NAME_INDEX]
+            and left_value[NAME_INDEX] > right_value[NAME_INDEX]
         ))
     )
 
 
 def nums_ge(left_value, right_value) -> bool:
-    return left_value[SCORE_INDEX] > right_value[SCORE_INDEX] or (
+    return left_value[SCORE_INDEX] < right_value[SCORE_INDEX] or (
         left_value[SCORE_INDEX] == right_value[SCORE_INDEX]
-        and (left_value[PENALTY_INDEX] < right_value[PENALTY_INDEX] or (
+        and (left_value[PENALTY_INDEX] > right_value[PENALTY_INDEX] or (
             left_value[PENALTY_INDEX] == right_value[PENALTY_INDEX]
-            and left_value[NAME_INDEX] <= right_value[NAME_INDEX]
+            and left_value[NAME_INDEX] >= right_value[NAME_INDEX]
         ))
     )
 
@@ -35,7 +35,7 @@ def q_sort(nums, left, right) -> None:
     start = left
     end = right
     pivot = nums[left]
-    while left < right - 1:
+    while left < right:
         while nums_gt(pivot, nums[left]) and left < right - 1:
             left += 1
         while nums_ge(nums[right], pivot) and right > left + 1:

@@ -18,7 +18,7 @@ def q_sort(nums, left, right) -> None:
     end = right
     pivot = nums[left]
     logging.info(f'"{pivot}" {start} {left} {right} {end} {nums}')
-    while left < right - 1:
+    while left < right:
         while nums[left] < pivot and left < right - 1:
             left += 1
             logging.info(f'left={left} nums[{left}]={nums[left]}')
@@ -37,8 +37,8 @@ def q_sort(nums, left, right) -> None:
     q_sort(nums, left + 1, end)
 
 
-# nums = [4, 8, 9, 20, 1, 5, 3, 10]
-nums = [4, 6, 2, 2, 4]
+nums = [4, 8, 9, 20, 1, 5, 3, 10]
+# nums = [4, 6, 2, 2, 4]
 logging.basicConfig(
     level=logging.INFO,
     filename="q_sort.log",
