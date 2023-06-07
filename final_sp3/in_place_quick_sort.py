@@ -36,19 +36,17 @@ def q_sort(nums, left, right) -> None:
     end = right
     pivot = nums[left]
     while left < right:
-        while nums_gt(pivot, nums[left]) and left < right - 1:
+        while nums_gt(pivot, nums[left]) and left < right:
             left += 1
-        while nums_ge(nums[right], pivot) and right > left + 1:
+        while nums_ge(nums[right], pivot) and right > left:
             right -= 1
         if nums_gt(nums[left], nums[right]):
             nums[left], nums[right] = nums[right], nums[left]
-        right -= 1
-        if left < right:
-            left += 1
     if left > start:
         q_sort(nums, start, left - 1)
         q_sort(nums, left, end)
-    q_sort(nums, left + 1, end)
+    else:
+        q_sort(nums, left + 1, end)
 
 
 def in_place_quick_sort(participants: List[List[Union[str, int]]]) -> None:

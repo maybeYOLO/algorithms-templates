@@ -43,22 +43,20 @@ def q_sort(nums, left, right) -> None:
     pivot = nums[left]
     logging.info(f'"{pivot}" {start} {left} {right} {end} {nums}')
     while left < right - 1:
-        while nums_gt(pivot, nums[left]) and left < right - 1:
+        while nums_gt(pivot, nums[left]) and left < right:
             left += 1
             logging.info(f'left={left} nums[{left}]={nums[left]}')
-        while nums_ge(nums[right], pivot) and right > left + 1:
+        while nums_ge(nums[right], pivot) and right > left:
             right -= 1
             logging.info(f'right={right} nums[{right}]={nums[right]}')
         if nums_gt(nums[left], nums[right]):
             nums[left], nums[right] = nums[right], nums[left]
             logging.info(f'"{pivot}" {start} {left} {right} {end} {nums} \'swap\'')
-        right -= 1
-        if left < right:
-            left += 1
     if left > start:
         q_sort(nums, start, left - 1)
         q_sort(nums, left, end)
-    q_sort(nums, left + 1, end)
+    else:
+        q_sort(nums, left + 1, end)
 
 
 nums = [
