@@ -9,7 +9,7 @@ def q_sort(nums, left, right) -> None:
         return
     if right - left == 1:
         logging.info(f'right={right} - left={left} == 1')
-        if nums[left] > nums[right]:
+        if nums[right] < nums[left]:
             logging.info(f'nums[left]={nums[left]} > nums[right]={nums[right]}')
             nums[left], nums[right] = nums[right], nums[left]
             logging.error(f'{left, right} {nums} \'swap\'')
@@ -22,10 +22,10 @@ def q_sort(nums, left, right) -> None:
         while nums[left] < pivot and left < right:
             left += 1
             logging.info(f'left={left} nums[{left}]={nums[left]}')
-        while nums[right] >= pivot and right > left:
+        while  not nums[right] < pivot and right > left:
             right -= 1
             logging.info(f'right={right} nums[{right}]={nums[right]}')
-        if nums[left] > nums[right]:
+        if left != right:
             nums[left], nums[right] = nums[right], nums[left]
             logging.error(f'\'{pivot}\' {start} {left, right} {end} {nums} \'swap\'')
     logging.debug(f'\'{pivot}\' {start} {left, right} {end} {nums}')
@@ -39,9 +39,9 @@ def q_sort(nums, left, right) -> None:
         q_sort(nums, left + 1, end)
 
 
-# nums = [4, 8, 9, 20, 1, 5, 3, 10]
+nums = [4, 8, 9, 20, 1, 5, 3, 10]
 # nums = [4, 6, 2, 2, 4]
-nums = [10, 9, 8, 7, 0]
+# nums = [10, 9, 8, 7, 0]
 logging.basicConfig(
     level=logging.DEBUG,
     filename="q_sort.log",

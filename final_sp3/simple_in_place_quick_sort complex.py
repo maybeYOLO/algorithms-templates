@@ -15,16 +15,6 @@ def nums_gt(left_value, right_value) -> bool:
     )
 
 
-def nums_ge(left_value, right_value) -> bool:
-    return left_value[SCORE_INDEX] > right_value[SCORE_INDEX] or (
-        left_value[SCORE_INDEX] == right_value[SCORE_INDEX]
-        and (left_value[PENALTY_INDEX] < right_value[PENALTY_INDEX] or (
-            left_value[PENALTY_INDEX] == right_value[PENALTY_INDEX]
-            and left_value[NAME_INDEX] <= right_value[NAME_INDEX]
-        ))
-    )
-
-
 def q_sort(nums, left, right) -> None:
     logging.info('.' * 60)
     logging.info(f'nums={nums} left={left} right={right}')
@@ -46,10 +36,10 @@ def q_sort(nums, left, right) -> None:
         while nums_gt(pivot, nums[left]) and left < right:
             left += 1
             logging.info(f'left={left} nums[{left}]={nums[left]}')
-        while nums_ge(nums[right], pivot) and right > left:
+        while not nums_gt(pivot, nums[right]) and right > left:
             right -= 1
             logging.info(f'right={right} nums[{right}]={nums[right]}')
-        if nums_gt(nums[left], nums[right]):
+        if left != right:
             nums[left], nums[right] = nums[right], nums[left]
             logging.info(f'"{pivot}" {start} {left} {right} {end} {nums} \'swap\'')
     if left > start:
