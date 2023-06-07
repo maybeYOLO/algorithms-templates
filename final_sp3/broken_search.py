@@ -4,9 +4,9 @@ from typing import List
 def partial_search(nums: List[int], target: int, index: int, half_length: int, full_length: int) -> int:
     if nums[index] == target:
         return index
-    if half_length == 1:
+    if half_length == 10:
         return -1
-    # q
+    return partial_search(nums, target, (index + 1) % full_length, half_length, full_length)
 
 
 def broken_search(nums: List[int], target: int) -> int:
