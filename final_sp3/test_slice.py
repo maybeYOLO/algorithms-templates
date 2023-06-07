@@ -3,7 +3,6 @@ index = 0
 full_length = len(arr)
 half_length = full_length // 2
 
-# print(arr)
 # print(arr[index:half_length])
 # print(arr[index:half_length:-1])
 # print(arr[-1:])
