@@ -1,16 +1,41 @@
 from typing import List
 
 
-def partial_search(nums: List[int], target: int, index: int, half_length: int, full_length: int) -> int:
-    if nums[index] == target:
-        return index
-    if half_length == 10:
-        return -1
-    return partial_search(nums, target, (index + 1) % full_length, half_length, full_length)
-
-
 def broken_search(nums: List[int], target: int) -> int:
-    return partial_search(nums, target, 0, len(nums) // 2, len(nums))
+
+    def partial_search() -> int:
+
+        nonlocal nums, target, left, right, left_value, right_value
+
+        index = left + (right - left) // 2
+        new_value = nums[index]
+        if new_value == target:
+            return index
+        if left >= right - 1:
+            return -1
+        if left_value < target < new_value:
+            right = index
+            right_value = new_value
+        elif new_value < target < right_value:
+            left = index
+            left_value = new_value
+        elif left_value > new_value:
+            right = index
+            right_value = new_value
+        else:
+            left = index
+            left_value = new_value
+        return partial_search()
+
+    left = 0
+    left_value = nums[left]
+    if left_value == target:
+        return left
+    right = len(nums) - 1
+    right_value = nums[right]
+    if right_value == target:
+        return right
+    return partial_search()
 
 
 def test() -> None:
