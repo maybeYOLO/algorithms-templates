@@ -11,14 +11,15 @@ def in_place_quick_sort(nums: List[Tuple[str, int, int]]) -> None:
 
     def q_sort(left: int, right: int) -> None:
 
-        def nums_gt(left_value: Tuple[str, int, int], right_value: Tuple[str, int, int]) -> bool:
-            return left_value[SCORE_INDEX] < right_value[SCORE_INDEX] or (
-                left_value[SCORE_INDEX] == right_value[SCORE_INDEX]
-                and (left_value[PENALTY_INDEX] > right_value[PENALTY_INDEX] or (
-                    left_value[PENALTY_INDEX] == right_value[PENALTY_INDEX]
-                    and left_value[NAME_INDEX] > right_value[NAME_INDEX]
-                ))
-            )
+        def nums_gt(left_value, right_value) -> bool:
+            return (
+                left_value[SCORE_INDEX] < right_value[SCORE_INDEX]
+                or (left_value[SCORE_INDEX] == right_value[SCORE_INDEX]
+                    and (left_value[PENALTY_INDEX] > right_value[PENALTY_INDEX]
+                    or (left_value[PENALTY_INDEX] == right_value[PENALTY_INDEX]
+                        and left_value[NAME_INDEX] > right_value[NAME_INDEX]
+                        ))
+                    ))
 
         nonlocal nums
 
