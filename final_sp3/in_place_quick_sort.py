@@ -1,6 +1,6 @@
-# ID = 88040814
+# ID = 
 
-from typing import List, Tuple
+from typing import List
 from dataclasses import dataclass
 
 
@@ -20,36 +20,40 @@ class Participant:
                     ))
                 ))
 
+    def __lt__(self, other):
+        return (
+            self.score > other.score
+            or (self.score == other.score
+                and (self.penalty < other.penalty
+                or (self.penalty == other.penalty
+                    and self.name < other.name
+                    ))
+                ))
+
+
+def partition(nums: List[Participant], left: int, right: int) -> int:
+    pivot = nums[left + (right - left) // 2]
+    while True:
+        while nums[left] < pivot:
+            left += 1
+        while nums[right] > pivot:
+            right -= 1
+        if left >= right:
+            return right
+        nums[left], nums[right] = nums[right], nums[left]
+        left += 1
+        right -= 1
+
+
+def quicksort(nums: List[Participant], left: int, right: int) -> None:
+    if left >= 0 and right >= 0 and left < right:
+        p = partition(nums, left, right)
+        quicksort(nums, left, p)
+        quicksort(nums, p + 1, right)
+
 
 def in_place_quick_sort(nums: List[Participant]) -> None:
-
-    def q_sort(left: int, right: int) -> None:
-
-        nonlocal nums
-
-        if left == right:
-            return
-        if right - left == 1:
-            if nums[left] > nums[right]:
-                nums[left], nums[right] = nums[right], nums[left]
-            return
-        start = left
-        end = right
-        pivot = nums[left]
-        while left < right:
-            while pivot > nums[left] and left < right:
-                left += 1
-            while not pivot > nums[right] and right > left:
-                right -= 1
-            if left != right:
-                nums[left], nums[right] = nums[right], nums[left]
-        if left > start:
-            q_sort(start, left - 1)
-            q_sort(left, end)
-        else:
-            q_sort(left + 1, end)
-
-    q_sort(0, len(nums) - 1)
+    quicksort(nums, 0, len(nums) - 1)
 
 
 if __name__ == '__main__':
