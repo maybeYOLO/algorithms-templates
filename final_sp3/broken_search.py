@@ -5,10 +5,16 @@ from typing import List
 
 def broken_search(nums: List[int], target: int) -> int:
 
-    def partial_search() -> int:
+    left = 0
+    left_value = nums[left]
+    if left_value == target:
+        return left
+    right = len(nums) - 1
+    right_value = nums[right]
+    if right_value == target:
+        return right
 
-        nonlocal nums, target, left, right, left_value, right_value
-
+    while True:
         index = left + (right - left) // 2
         new_value = nums[index]
         if new_value == target:
@@ -27,19 +33,9 @@ def broken_search(nums: List[int], target: int) -> int:
         else:
             left = index
             left_value = new_value
-        return partial_search()
-
-    left = 0
-    left_value = nums[left]
-    if left_value == target:
-        return left
-    right = len(nums) - 1
-    right_value = nums[right]
-    if right_value == target:
-        return right
-    return partial_search()
 
 
-def test() -> None:
-    arr = [19, 21, 100, 101, 1, 4, 5, 7, 12]
-    assert broken_search(arr, 5) == 6
+if __name__ == '__main__':
+    def test() -> None:
+        arr = [19, 21, 100, 101, 1, 4, 5, 7, 12]
+        assert broken_search(arr, 5) == 6

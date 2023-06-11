@@ -39,14 +39,18 @@ def q_sort(nums, left, right) -> None:
         q_sort(nums, left + 1, end)
 
 
-nums = [4, 8, 9, 20, 1, 5, 3, 10]
-# nums = [4, 6, 2, 2, 4]
-# nums = [10, 9, 8, 7, 0]
 logging.basicConfig(
     level=logging.DEBUG,
     filename="q_sort.log",
     filemode="w",
     format="[%(levelname)s]\t%(message)s"
 )
+nums = [4, 8, 9, 20, 1, 5, 3, 10]
+q_sort(nums, 0, len(nums) - 1)
+print(nums)
+nums = [4, 6, 2, 2, 4]
+q_sort(nums, 0, len(nums) - 1)
+print(nums)
+nums = [10, 9, 8, 7, 0]
 q_sort(nums, 0, len(nums) - 1)
 print(nums)
