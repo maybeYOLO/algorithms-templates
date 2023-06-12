@@ -1,9 +1,9 @@
 from time import time
 
-from simple_broken_search import broken_search
+from broken_search import broken_search
 
 time_start = time()
-max_dimension = 25
+max_dimension = 30
 count = 0
 for list_length in range(1, max_dimension):
     for offset in range(list_length):
