@@ -3,7 +3,7 @@ from time import time
 from broken_search import broken_search
 
 time_start = time()
-max_dimension = 30
+max_dimension = 10
 count = 0
 for list_length in range(1, max_dimension):
     for offset in range(list_length):
