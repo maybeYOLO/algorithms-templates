@@ -1,38 +1,31 @@
-# ID = 88114086
+# ID = 
 
 from typing import List
 
 
 def broken_search(nums: List[int], target: int) -> int:
 
-    left = 0
-    left_value = nums[left]
-    if left_value == target:
-        return left
-    right = len(nums) - 1
-    right_value = nums[right]
-    if right_value == target:
-        return right
+    left_index = 0
+    if nums[left_index] == target:
+        return left_index
+    right_index = len(nums) - 1
+    if nums[right_index] == target:
+        return right_index
 
-    while True:
-        index = left + (right - left) // 2
-        new_value = nums[index]
-        if new_value == target:
-            return index
-        if left >= right - 1:
-            return -1
-        if left_value < target < new_value:
-            right = index
-            right_value = new_value
-        elif new_value < target < right_value:
-            left = index
-            left_value = new_value
-        elif left_value > new_value:
-            right = index
-            right_value = new_value
+    while left_index < right_index - 1:
+        middle_index = left_index + (right_index - left_index) // 2
+        middle_value = nums[middle_index]
+        if middle_value == target:
+            return middle_index
+        if nums[left_index] < target < middle_value:
+            right_index = middle_index
+        elif middle_value < target < nums[right_index]:
+            left_index = middle_index
+        elif nums[left_index] > middle_value:
+            right_index = middle_index
         else:
-            left = index
-            left_value = new_value
+            left_index = middle_index
+    return -1
 
 
 if __name__ == '__main__':
